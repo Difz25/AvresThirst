@@ -26,7 +26,7 @@ class AvresThirst extends PluginBase {
     }
 
     public function defaultThirst($amount = 100): array {
-        return $this->mgr-?defaultThirst();
+        return $this->mgr->defaultThirst();
     }
 
     public function getAllThirst(): array {
