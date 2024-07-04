@@ -6,7 +6,7 @@ use Difz25\AvresThirst\AvresThirst;
 use pocketmine\player\Player;
 use pocketmine\event\player\PlayerJoinEvent;
 
-interface Manager{
+class Manager{
 
     /**
      * @param AvresThirst $plugin
