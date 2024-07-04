@@ -4,8 +4,10 @@ namespace Difz25\AvresThirst\Manager;
 
 use Difz25\AvresThirst\AvresThirst;
 use pocketmine\player\Player;
+use pocketmine\event\player\PlayerJoinEvent;
 
 interface Manager{
+    
     public function __construct(AvresThirst $plugin);
 
     public function open(): void;
