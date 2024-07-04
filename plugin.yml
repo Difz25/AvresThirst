@@ -1,0 +1,7 @@
+name: AvresThirst
+version: 1.0.0
+api: 
+- 5.0.0
+main: Difz25\AvresThirst\AvresThirst
+author: Difz25
+description: Thirst plugin to give, add, set, reduce, get, getall thirst of player
