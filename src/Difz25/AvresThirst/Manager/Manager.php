@@ -7,9 +7,12 @@ use pocketmine\player\Player;
 use pocketmine\event\player\PlayerJoinEvent;
 
 interface Manager{
-    
+
     public function __construct(AvresThirst $plugin);
 
+    /**
+     * @return void
+     */
     public function open(): void;
 
     /**
@@ -19,7 +22,7 @@ interface Manager{
     public function onPlayerJoin(PlayerJoinEvent $event): void;
 
     /**
-    * @param string $player
+    * @param float $amount
     * @return array
     */
     public function defaultThirst($amount = 100): array;
@@ -50,9 +53,14 @@ interface Manager{
     * @return bool
     */
     public function reduceThirst(Player|string $player, float $amount): bool;
-
+    /**
+     * @return void
+     */
     public function save(): void;
     
+    /**
+     * @return void
+     */
     public function close(): void;
 
     /**

@@ -21,9 +21,13 @@ class AvresThirst extends PluginBase {
         $this->config = new Config($this->getDataFolder() . "thirst.yml", Config::YAML, ["version" => 2, "thirst" => [],]);
         $this->mgr->save();
     }
-     protected function onDisable(): void {
-         $this->mgr->close();
-     }
+    protected function onDisable(): void {
+        $this->mgr->close();
+    }
+
+    public function defaultThirst($amount = 100): array {
+        return $this->mgr-?defaultThirst();
+    }
 
     public function getAllThirst(): array {
         return $this->mgr->getAll();
