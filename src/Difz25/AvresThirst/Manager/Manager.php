@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Difz25\AvresThirst\Manager;
 
 use Difz25\AvresThirst\AvresThirst;
 use pocketmine\player\Player;
 use pocketmine\event\player\PlayerJoinEvent;
 
-class Manager{
+abstract class PluginBase{
 
     /**
      * @param AvresThirst $plugin
