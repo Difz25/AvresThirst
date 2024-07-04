@@ -8,6 +8,9 @@ use pocketmine\event\player\PlayerJoinEvent;
 
 interface Manager{
 
+    /**
+     * @param AvresThirst $plugin
+     */
     public function __construct(AvresThirst $plugin);
 
     /**

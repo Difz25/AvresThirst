@@ -2,7 +2,7 @@
 
 namespace Difz25\AvresThirst\Manager;
 
-use Difz25\AvresThirst\Avresthirst;
+use Difz25\AvresThirst\AvresThirst;
 use Difz25\Avresthirst\Manager\Manager;
 
 use JsonException;
