@@ -2,10 +2,9 @@
 
 namespace Difz25\AvresThirst;
 
-use JsonException;
-use pocketmine\player\Player;
-use pocketmine\plugin\PluginBase;
 use Difz25\AvresThirst\Manager\ThirstManager;
+use JsonException;
+use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 
 class AvresThirst extends PluginBase {
@@ -28,8 +27,8 @@ class AvresThirst extends PluginBase {
         $this->mgr->close();
     }
 
-    public function defaultThirst($amount = 100): array {
-        return $this->mgr->defaultThirst();
+    public function defaultThirst(): int {
+        return $this->mgr->getDefaultThirst();
     }
 
     public function getAllThirst(): array {
@@ -51,13 +50,5 @@ class AvresThirst extends PluginBase {
     
     public function addThirst($player, $amount): bool {
         return $this->mgr->addThirst($player, $amount);
-    }
-    
-    public function getThirstData(): Config {
-        return $this->config;
-    }
-    
-    public function getConfigData(): Config {
-        return $this->config;
     }
 }
