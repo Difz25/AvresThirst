@@ -10,9 +10,9 @@ This plugin can add, reduce, get, getall player money
 # Configuration
 ```yaml
 Thirst:
-    Difz25: 100
+    Difz25: 100 // This is the player thirst default is 100
 maxThirst:
-    Difz25: 100
+    Difz25: 100 // This is the max player thirst default is 100
 ```
 
 # Changelog
