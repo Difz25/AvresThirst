@@ -9,9 +9,10 @@ This plugin can add, reduce, get, getall player money
 
 # Configuration
 ```yaml
-Difz25: 100
-Player1: 100
-Player2: 100
+Thirst:
+    Difz25: 100
+maxThirst:
+    Difz25: 100
 ```
 
 # Changelog
