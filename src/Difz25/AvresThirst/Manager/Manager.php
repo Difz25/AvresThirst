@@ -8,7 +8,7 @@ use Difz25\AvresThirst\AvresThirst;
 use pocketmine\player\Player;
 use pocketmine\event\player\PlayerJoinEvent;
 
-abstract class PluginBase{
+interface Manager{
 
     /**
      * @param AvresThirst $plugin
@@ -27,12 +27,6 @@ abstract class PluginBase{
     public function onPlayerJoin(PlayerJoinEvent $event): void;
 
     /**
-    * @param float $amount
-    * @return array
-    */
-    public function defaultThirst($amount = 100): array;
-
-    /**
     * @param string $player
     * @return float|bool
     */
@@ -43,6 +37,17 @@ abstract class PluginBase{
     * @param float $amount
     * @return bool
     */
+    
+    /**
+    * @return int
+    */
+    public function getDefaultThirst(): int;
+    /**
+     * @param string|Player $player
+     * @return float|bool
+     */
+    public function getMaxThirst(string|Player $player): float|bool;
+    
     public function setThirst(Player|string $player, float $amount): bool;
 
     /**

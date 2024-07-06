@@ -18,9 +18,12 @@ class AvresThirst extends PluginBase {
      */
     public function onEnable(): void {
         $this->mgr = new ThirstManager($this);
-        $this->config = new Config($this->getDataFolder() . "thirst.yml", Config::YAML, ["version" => 2, "thirst" => [],]);
         $this->mgr->save();
     }
+
+    /**
+     * @throws JsonException
+     */
     protected function onDisable(): void {
         $this->mgr->close();
     }
@@ -33,7 +36,8 @@ class AvresThirst extends PluginBase {
         return $this->mgr->getAll();
     }
     
-    public function getThirst($player) {
+    public function getThirst($player): float|bool
+    {
         return $this->mgr->getThirst($player);
     }
     
@@ -55,9 +59,5 @@ class AvresThirst extends PluginBase {
     
     public function getConfigData(): Config {
         return $this->config;
-    }
-    
-    public function isPlayer($player): void {
-        if($player instanceof Player);
     }
 }

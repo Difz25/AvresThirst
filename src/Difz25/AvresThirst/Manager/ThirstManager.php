@@ -3,11 +3,10 @@
 namespace Difz25\AvresThirst\Manager;
 
 use Difz25\AvresThirst\AvresThirst;
-use Difz25\Avresthirst\Manager\Manager;
 
 use JsonException;
+use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\player\Player;
-use poketmine\event\player\PlayerJoinEvent;
 use pocketmine\utils\Config;
 
 class ThirstManager implements Manager{
@@ -21,13 +20,14 @@ class ThirstManager implements Manager{
     }
     
     public function open(): void {
-        $this->config = new Config($this->plugin->getDataFolder() . "thirst.yml", Config::YAML, ["version" => 1, "thirst" => []]);
+        $this->config = new Config($this->plugin->getDataFolder() . "thirst.yml", Config::YAML, ["version" => 1, "thirst" => [], "maxThirst" => []]);
 		$this->thirstData = $this->config->getAll();
     }
 
-    public function onPlayerJoin(PlayerJoinEvent $event){
+    public function onPlayerJoin(PlayerJoinEvent $event): void {
         $player = $event->getPlayer();
-        return $thirstData->thirstData["thirst"][$player] = $this->defaultThirst();
+        $player = $player->getName();
+        $this->thirstData["thirst"][$player] = $this->getDefaultThirst();
     }
     
     public function getThirst(string|Player $player): float|bool {
@@ -41,8 +41,19 @@ class ThirstManager implements Manager{
         return false;
     }
 
-    public function defaultThirst($amount = 100): array {
-        return $this->thirst["thirst"][$player] = $amount;
+    public function getDefaultThirst(): int {
+        return 100;
+    }
+    
+    public function getMaxThirst(string|Player $player): float|bool {
+        $player = $player->getName();
+		$player = strtolower($player);
+
+        if(isset($this->thirst["maxThirst"][$player])){
+            return $this->thirstData["maxThirst"][$player];
+        }
+        
+        return false;
     }
     
     public function setThirst($player, $amount): bool
@@ -50,11 +61,13 @@ class ThirstManager implements Manager{
 		$player = $player->getName();
 		$player = strtolower($player);
 
-		if(isset($this->thirst["thirst"][$player])){
-			$this->thirst["thirst"][$player] = $amount;
-			$this->thirst["thirst"][$player] = round($this->thirst["thirst"][$player], 2);
-			return true;
-		}
+        if(isset($this->thirst["thirst"][$player])){
+            if($this->thirstData["thirst"][$player] < 100){
+                $this->thirst["thirst"][$player] = $amount;
+                $this->thirst["thirst"][$player] = round($this->thirst["thirst"][$player], 2);
+                return true;
+            }
+        }
 		return false;
     }
     
@@ -66,9 +79,11 @@ class ThirstManager implements Manager{
         $player = strtolower($player);
 
         if(isset($this->thirst["thirst"][$player])){
-            $this->thirst["thirst"][$player] -= $amount;
-            $this->thirst["thirst"][$player] = round($this->thirst["thirst"][$player], 2);
-            return true;
+            if($this->thirstData["thirst"][$player] < 100){
+                $this->thirst["thirst"][$player] -= $amount;
+                $this->thirst["thirst"][$player] = round($this->thirst["thirst"][$player], 2);
+                return true;
+            }
         }
         return false;
     }
@@ -78,10 +93,12 @@ class ThirstManager implements Manager{
 		$player = $player->getName();
 		$player = strtolower($player);
 
-		if(isset($this->thirst["thirst"][$player])){
-            $this->thirst["thirst"][$player] += $amount;
-            $this->thirst["thirst"][$player] = round($this->thirst["thirst"][$player], 2);
-            return true;
+        if(isset($this->thirst["thirst"][$player])){
+            if($this->thirstData["thirst"][$player] < 100){
+                $this->thirst["thirst"][$player] += $amount;
+                $this->thirst["thirst"][$player] = round($this->thirst["thirst"][$player], 2);
+                return true;
+            }
         }
         return false;
     }
